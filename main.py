@@ -12,6 +12,19 @@ def EXPMOD(x, y, p):
 
     return res
 
+def prime_factors(n):
+    i = 2
+    factors = []
+    while i * i <= n:
+        if n % i:
+            i += 1
+        else:
+            n //= i
+            factors.append(i)
+    if n > 1:
+        factors.append(n)
+    return factors
+
 def COMPUESTO(d, n):
     a = 2 + random.randint(1, n - 4)
     x = EXPMOD(a, d, n)
@@ -118,14 +131,19 @@ for mensaje in mensajes:
   HASH.append(hash_mensaje)
   u=int(hash_mensaje,16)
   U.append(u)
-  fir=decifrado(u,n,e)
-  md=cifrado(fir,n,d)
+  fir=decifrado(u,n,d)
+  md=cifrado(fir,n,e)
   M.append(md)
   FIR.append(fir)
 
-mens=["Hola Mundo","CAS SOLA","MARVEL:END GAME"]
+mens=["Hola Mundo","casa sola","MARVEL:END GAME"]
 HA_B=[]
 UP=[]
+fac=prime_factors(n)
+p=fac[0]-1
+q=fac[1]-1
+fin=p*q
+dp = inverso(e,fin)
 for ha in mens:
   bdatos=bytes(ha,encoding='utf-8')
   r=hashlib.new("sha1",bdatos)
@@ -133,22 +151,22 @@ for ha in mens:
   hash=r.hexdigest()
   HA_B.append(hash)
   up=int(hash,16)
-  fr=decifrado(up,n,e)
-  md=cifrado(fr,n,d)
+  fr=decifrado(up,n,dp)
+  md=cifrado(fr,n,e)
   UP.append(md)
 
 
 for men in FIR:
-  dm=cifrado(men,n,d)
+  dm=cifrado(men,n,e)
   DEC.append(dm)
 
-print("MENSAJES =",mensajes)
+print("MENSAJES DE ALICE=",mensajes)
 print("ALICE_HASH =",HASH)
 print("ALICE_M =",M)
+print()
+print("MENSAJES PARA BOB =",mens)
 print("FIRMA =",FIR)
 print()
-
-print("MENSAJES =",mens)
 print("BOB_HASH =",HA_B)
 print("BOB_UP =",UP)
 print("P(A) =",DEC)
