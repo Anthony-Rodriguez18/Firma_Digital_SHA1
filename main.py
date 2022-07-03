@@ -101,7 +101,7 @@ def decifrado(C,N,D):
 
 
 
-(n,e,d)=RSA(8)
+(n,e,d)=RSA(32)
 
 mensajes=["Hola Mundo","CASA SOLA","MARVEL:END GAME"]
 M=[]
