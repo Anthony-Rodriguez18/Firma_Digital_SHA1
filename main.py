@@ -101,7 +101,7 @@ def decifrado(C,N,D):
 
 
 
-(n,e,d)=RSA(32)
+(n,e,d)=RSA(8)
 
 mensajes=["Hola Mundo","CASA SOLA","MARVEL:END GAME"]
 M=[]
@@ -123,7 +123,7 @@ for mensaje in mensajes:
   M.append(md)
   FIR.append(fir)
 
-mens=["Hola Mundo","CASA SOLA","MARVEL:END GAME"]
+mens=["Hola Mundo","CAS SOLA","MARVEL:END GAME"]
 HA_B=[]
 UP=[]
 for ha in mens:
@@ -143,12 +143,22 @@ for men in FIR:
   DEC.append(dm)
 
 print("MENSAJES =",mensajes)
-print("HASH =",HASH)
+print("ALICE_HASH =",HASH)
 print("ALICE_M =",M)
 print("FIRMA =",FIR)
-print("P(A) =",DEC)
-print("BOB =",HA_B)
+print()
+
+print("MENSAJES =",mens)
+print("BOB_HASH =",HA_B)
 print("BOB_UP =",UP)
+print("P(A) =",DEC)
+print()
+
+for i in range(3):
+  if(DEC[i]==UP[i]):
+    print("VALIDACION EXITOSA")
+  else:
+    print("ERROR - HUBO INTRUSO")
 
 
 
